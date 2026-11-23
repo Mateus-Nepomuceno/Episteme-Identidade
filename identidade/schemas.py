@@ -52,9 +52,7 @@ def normalizar_telefone(valor: str) -> str:
 
     digitos = re.sub(r'\D', '', valor)
 
-    if len(digitos) in TELEFONE_TAMANHOS_COM_PAIS and digitos.startswith(
-        '55'
-    ):
+    if len(digitos) in TELEFONE_TAMANHOS_COM_PAIS and digitos.startswith('55'):
         digitos = digitos[2:]
 
     if len(digitos) not in TELEFONE_TAMANHOS_NACIONAIS:
@@ -94,6 +92,7 @@ class UsuarioPublic(BaseModel):
     nome: str
     email: EmailStr
     e_admin: bool
+    tem_foto: bool = False
 
 
 class Token(BaseModel):
