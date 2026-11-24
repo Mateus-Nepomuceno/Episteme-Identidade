@@ -54,9 +54,7 @@ def test_read_usuario_sem_autenticacao(client, user):
     assert response.status_code == HTTPStatus.UNAUTHORIZED
 
 
-def test_read_usuario_de_outro_usuario_e_negado(
-    client, admin, user_token
-):
+def test_read_usuario_de_outro_usuario_e_negado(client, admin, user_token):
     response = client.get(
         f'/usuarios/{admin.id}',
         headers={'Authorization': f'Bearer {user_token}'},
@@ -236,16 +234,12 @@ def test_create_usuario_sem_campo_senha_e_recusado(client, session):
 
 
 def test_create_usuario_senha_curta_e_recusada(client, session):
-    response = client.post(
-        '/usuarios/', json=_payload_usuario(senha='a' * 7)
-    )
+    response = client.post('/usuarios/', json=_payload_usuario(senha='a' * 7))
     assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
 
 
 def test_create_usuario_senha_minima_e_aceita(client, session):
-    response = client.post(
-        '/usuarios/', json=_payload_usuario(senha='a' * 8)
-    )
+    response = client.post('/usuarios/', json=_payload_usuario(senha='a' * 8))
     assert response.status_code == HTTPStatus.CREATED
 
 
